@@ -69,7 +69,7 @@ class Program
 
                 updateStopwatch.Restart();
             }
-            
+
             if (CheckForInput())
             {
                 Console.ReadKey();
@@ -162,7 +162,7 @@ class Program
     {
         Console.SetCursorPosition(0, 0);
 
-        Console.WriteLine("Generations: " + Updates);
+        Console.WriteLine("Generation: " + Updates);
         for (int y = 1; y < Height - 1; y++)
         {
             for (int x = 1; x < Width - 1; x++)

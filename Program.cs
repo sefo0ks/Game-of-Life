@@ -89,7 +89,7 @@ class Program
         
         ShowGrid(_grid);
     }
-
+    
     private static Cell[,] CreateNewGrid(Cell[,]? _basedOn = null)
     {
         Cell[,] _grid = new Cell[Height, Width];

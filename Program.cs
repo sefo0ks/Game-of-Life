@@ -66,14 +66,15 @@ class Program
                     Console.Clear();
                     Reset(ref grid);
                 }
-                if (CheckForInput())
-                {
-                    Console.ReadKey();
-                    Console.Clear();
-                    Reset(ref grid);
-                }
 
                 updateStopwatch.Restart();
+            }
+            
+            if (CheckForInput())
+            {
+                Console.ReadKey();
+                Console.Clear();
+                Reset(ref grid);
             }
         }
     }

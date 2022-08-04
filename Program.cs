@@ -34,6 +34,7 @@ class Program
             catch (Exception)
             {
                 Console.WriteLine("Wrong input. Type only numbers.");
+                Console.ReadKey(true);
             }
         }
         Console.Clear();

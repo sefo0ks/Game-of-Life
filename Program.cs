@@ -139,7 +139,7 @@ class Program
 
     private static int CountNeighbors(Cell[,] _grid, int _y, int _x)
     {
-        int neighbors = 0;
+        int _neighbors = 0;
         if (_y == 0 || _x == 0 || _y == Height - 1 || _x == Width - 1)
             return 0;
         
@@ -151,11 +151,11 @@ class Program
                     continue;
 
                 if (_grid[_y + yOff, _x + xOff].State == CellState.Alive)
-                    neighbors++;
+                    _neighbors++;
             }
         }
 
-        return neighbors;
+        return _neighbors;
     }
 
     private static void ShowGrid(Cell[,] _grid)

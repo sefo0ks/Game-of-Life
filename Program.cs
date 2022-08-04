@@ -161,8 +161,7 @@ class Program
     {
         Console.SetCursorPosition(0, 0);
 
-        Console.WriteLine("Updates: " + Updates);
-
+        Console.WriteLine("Generations: " + Updates);
         for (int y = 1; y < Height - 1; y++)
         {
             for (int x = 1; x < Width - 1; x++)

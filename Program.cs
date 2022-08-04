@@ -57,6 +57,7 @@ class Program
                 Updates++;
                 //Console.ReadKey(true);
                 ShowGrid(grid);
+                Console.WriteLine("Generation: " + Updates);
                 Console.WriteLine("Press any key to restart...");
 
                 if (CheckForAllDead(grid))
@@ -89,7 +90,7 @@ class Program
         ShowGrid(_grid);
     }
 
-    private static Cell[,] CreateNewGrid(Cell[,]? basedOn = null)
+    private static Cell[,] CreateNewGrid(Cell[,]? _basedOn = null)
     {
         Cell[,] _grid = new Cell[Height, Width];
 
@@ -99,8 +100,8 @@ class Program
             {
                 _grid[y, x] = new Cell();
 
-                if (basedOn != null)
-                    _grid[y, x].State = basedOn[y, x].State;
+                if (_basedOn != null)
+                    _grid[y, x].State = _basedOn[y, x].State;
                 else if (RandomCells)
                 {
                     if (y == 0 || x == 0 || y == Height - 1 || x == Width - 1)
@@ -136,10 +137,10 @@ class Program
         return _newGrid;
     }
 
-    private static int CountNeighbors(Cell[,] _grid, int y, int x)
+    private static int CountNeighbors(Cell[,] _grid, int _y, int _x)
     {
         int neighbors = 0;
-        if (y == 0 || x == 0 || y == Height - 1 || x == Width - 1)
+        if (_y == 0 || _x == 0 || _y == Height - 1 || _x == Width - 1)
             return 0;
         
         for (int yOff = -1; yOff <= 1; yOff++)
@@ -149,7 +150,7 @@ class Program
                 if (xOff == 0 && yOff == 0)
                     continue;
 
-                if (_grid[y + yOff, x + xOff].State == CellState.Alive)
+                if (_grid[_y + yOff, _x + xOff].State == CellState.Alive)
                     neighbors++;
             }
         }
@@ -161,7 +162,6 @@ class Program
     {
         Console.SetCursorPosition(0, 0);
 
-        Console.WriteLine("Generation: " + Updates);
         for (int y = 1; y < Height - 1; y++)
         {
             for (int x = 1; x < Width - 1; x++)

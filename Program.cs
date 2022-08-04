@@ -3,7 +3,10 @@
 class Program
 {
     public const int Width = 30, Height = 30;
-    
+    public static Random rand = new Random(); 
+
+    static bool RandomCells = true;
+
     static int UpdateRate = 350;
     static int Updates = 0;
     static Stopwatch updateStopwatch = new Stopwatch();
@@ -71,17 +74,23 @@ class Program
         _grid = CreateNewGrid();
         Updates = 0;
 
-        _grid[1, 1].State = CellState.Alive;
-        _grid[1, 3].State = CellState.Alive;
-        _grid[2, 2].State = CellState.Alive;
-        _grid[2, 3].State = CellState.Alive;
-        _grid[3, 2].State = CellState.Alive;
+        if (!RandomCells)
+        {
+            _grid[1, 1].State = CellState.Alive;
+            _grid[1, 3].State = CellState.Alive;
+            _grid[2, 2].State = CellState.Alive;
+            _grid[2, 3].State = CellState.Alive;
+            _grid[3, 2].State = CellState.Alive;
+        }
         ShowGrid(_grid);
     }
 
     private static Cell[,] CreateNewGrid(Cell[,]? basedOn = null)
     {
         Cell[,] _grid = new Cell[Height, Width];
+
+        if (basedOn != null)
+            RandomCells = false;
 
         for (int y = 0; y < Height; y++)
         {
@@ -91,6 +100,13 @@ class Program
 
                 if (basedOn != null)
                     _grid[y, x].State = basedOn[y, x].State;
+                else if (RandomCells)
+                {
+                    if (y == 0 || x == 0 || y == Height - 1 || x == Width - 1)
+                        _grid[y, x].State = CellState.Dead;
+                    else
+                        _grid[y, x].State = rand.Next(0, 11) <= 3 ? CellState.Alive : CellState.Dead;
+                }
             }
         }
 
@@ -145,22 +161,15 @@ class Program
         Console.SetCursorPosition(0, 0);
 
         Console.WriteLine("Updates: " + Updates);
-        for (int i = 0; i < Width * 2 + 2; i++)
-            Console.Write("-");
-        Console.WriteLine();
 
-        for (int y = 0; y < Height; y++)
+        for (int y = 1; y < Height - 1; y++)
         {
-            Console.Write("|");
-            for (int x = 0; x < Width; x++)
+            for (int x = 1; x < Width - 1; x++)
             {
                 _grid[y, x].Show();
             }
-            Console.WriteLine("|");
+            Console.WriteLine();
         }
-        
-        for (int i = 0; i < Width * 2 + 2; i++)
-            Console.Write("-");
     }
 
     private static bool CheckForAllDead(Cell[,] _grid)

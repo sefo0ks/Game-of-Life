@@ -15,6 +15,7 @@ class Program
     {
         Console.SetWindowSize(Width * 2, Height + 2);
         Console.SetBufferSize(Width * 2, Height + 2);
+        Console.CursorVisible = false;
 
         while(true)
         {

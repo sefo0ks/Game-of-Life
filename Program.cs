@@ -2,7 +2,7 @@
 
 class Program
 {
-    public const int Width = 30, Height = 30;
+    public const int Width = 50, Height = 50;
     public static Random rand = new Random(); 
 
     static bool RandomCells = true;
@@ -57,10 +57,17 @@ class Program
                 Updates++;
                 //Console.ReadKey(true);
                 ShowGrid(grid);
+                Console.WriteLine("Press any key to restart...");
 
                 if (CheckForAllDead(grid))
                 {
-                    //Console.ReadKey();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Reset(ref grid);
+                }
+                if (CheckForInput())
+                {
                     Reset(ref grid);
                 }
 
@@ -75,22 +82,14 @@ class Program
         Updates = 0;
 
         if (!RandomCells)
-        {
-            _grid[1, 1].State = CellState.Alive;
-            _grid[1, 3].State = CellState.Alive;
-            _grid[2, 2].State = CellState.Alive;
-            _grid[2, 3].State = CellState.Alive;
-            _grid[3, 2].State = CellState.Alive;
-        }
+            PresetGrid(out _grid);
+        
         ShowGrid(_grid);
     }
 
     private static Cell[,] CreateNewGrid(Cell[,]? basedOn = null)
     {
         Cell[,] _grid = new Cell[Height, Width];
-
-        if (basedOn != null)
-            RandomCells = false;
 
         for (int y = 0; y < Height; y++)
         {
@@ -179,6 +178,25 @@ class Program
                 if (_grid[y, x].State == CellState.Alive)
                     return false;
 
+        return true;
+    }
+
+    private static void PresetGrid(out Cell[,] _grid)
+    {
+        _grid = CreateNewGrid();
+
+        _grid[1, 1].State = CellState.Alive;
+        _grid[1, 3].State = CellState.Alive;
+        _grid[2, 2].State = CellState.Alive;
+        _grid[2, 3].State = CellState.Alive;
+        _grid[3, 2].State = CellState.Alive;
+    }
+
+    private static bool CheckForInput()
+    {
+        if (!Console.KeyAvailable)
+            return false;
+        
         return true;
     }
 }

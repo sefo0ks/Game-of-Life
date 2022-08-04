@@ -2,7 +2,7 @@
 
 class Program
 {
-    public const int Width = 50, Height = 50;
+    public const int Width = 80, Height = 54;
     public static Random rand = new Random(); 
 
     static bool RandomCells = true;
@@ -13,8 +13,8 @@ class Program
 
     private static void Main(string[] args)
     {
-        Console.SetWindowSize(Width * 3, Height + 10);
-        Console.SetBufferSize(Width * 3, Height + 10);
+        Console.SetWindowSize(Width * 2, Height + 4);
+        Console.SetBufferSize(Width * 2, Height + 4);
 
         while(true)
         {
@@ -68,6 +68,8 @@ class Program
                 }
                 if (CheckForInput())
                 {
+                    Console.ReadKey();
+                    Console.Clear();
                     Reset(ref grid);
                 }
 

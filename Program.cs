@@ -2,8 +2,8 @@
 
 class Program
 {
-    public const int Width = 80, Height = 54;
-    public static Random rand = new Random(); 
+    public const int Width = 120, Height = 61;
+    public static Random rand = new Random();
 
     static bool RandomCells = true;
 
@@ -13,8 +13,8 @@ class Program
 
     private static void Main(string[] args)
     {
-        Console.SetWindowSize(Width * 2, Height + 4);
-        Console.SetBufferSize(Width * 2, Height + 4);
+        Console.SetWindowSize(Width * 2, Height + 2);
+        Console.SetBufferSize(Width * 2, Height + 2);
 
         while(true)
         {
@@ -61,7 +61,6 @@ class Program
 
                 if (CheckForAllDead(grid))
                 {
-                    Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
                     Reset(ref grid);
@@ -107,7 +106,7 @@ class Program
                     if (y == 0 || x == 0 || y == Height - 1 || x == Width - 1)
                         _grid[y, x].State = CellState.Dead;
                     else
-                        _grid[y, x].State = rand.Next(0, 11) <= 3 ? CellState.Alive : CellState.Dead;
+                        _grid[y, x].State = rand.NextSingle() <= .33f ? CellState.Alive : CellState.Dead;
                 }
             }
         }
